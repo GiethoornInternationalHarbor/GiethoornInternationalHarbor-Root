@@ -1,0 +1,15 @@
+[submodule "RentalService"]
+	path = RentalService
+	url = https://github.com/GiethoornInternationalHarbor/RentalService
+[submodule "CustomerAdministrationService"]
+	path = CustomerAdministrationService
+	url = https://github.com/GiethoornInternationalHarbor/CustomerAdministrationService
+[submodule "ShipService"]
+	path = ShipService
+	url = https://github.com/GiethoornInternationalHarbor/ShipService
+[submodule "InvoiceService"]
+	path = InvoiceService
+	url = https://github.com/GiethoornInternationalHarbor/InvoiceService
+[submodule "ContainerService"]
+	path = ContainerService
+	url = https://github.com/GiethoornInternationalHarbor/ContainerService
