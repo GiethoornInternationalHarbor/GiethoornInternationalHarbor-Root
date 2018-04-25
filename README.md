@@ -15,5 +15,5 @@ These instructions will get you a copy of the project up and running on your loc
 Clone the complete environment by executing this command:
 
 ```
-git clone --recurse-submodules -j8 git://github.com/GiethoornInternationalHarbor/GiethoornInternationalHarbor-Root.git
+git clone --recurse-submodules -j8 https://github.com/GiethoornInternationalHarbor/GiethoornInternationalHarbor-Root.git
 ```
