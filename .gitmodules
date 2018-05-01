@@ -1,15 +1,33 @@
 [submodule "RentalService"]
 	path = RentalService
 	url = https://github.com/GiethoornInternationalHarbor/RentalService
-[submodule "CustomerAdministrationService"]
-	path = CustomerAdministrationService
-	url = https://github.com/GiethoornInternationalHarbor/CustomerAdministrationService
-[submodule "ShipService"]
-	path = ShipService
-	url = https://github.com/GiethoornInternationalHarbor/ShipService
+[submodule "CustomerService"]
+	path = CustomerService
+	url = https://github.com/GiethoornInternationalHarbor/CustomerService
+[submodule "ShipManagementService"]
+	path = ShipManagementService
+	url = https://github.com/GiethoornInternationalHarbor/ShipManagementService
 [submodule "InvoiceService"]
 	path = InvoiceService
 	url = https://github.com/GiethoornInternationalHarbor/InvoiceService
 [submodule "ContainerService"]
 	path = ContainerService
 	url = https://github.com/GiethoornInternationalHarbor/ContainerService
+[submodule "ElectricityService"]
+	path = ElectricityService
+	url = https://github.com/GiethoornInternationalHarbor/ElectricityService
+[submodule "RefuelService"]
+	path = RefuelService
+	url = https://github.com/GiethoornInternationalHarbor/RefuelService
+[submodule "SecurityService"]
+	path = SecurityService
+	url = https://github.com/GiethoornInternationalHarbor/SecurityService
+[submodule "TransportationService"]
+	path = TransportationService
+	url = https://github.com/GiethoornInternationalHarbor/TransportationService
+[submodule "DockService"]
+	path = DockService
+	url = https://github.com/GiethoornInternationalHarbor/DockService
+[submodule "ShipServiceManagementService"]
+	path = ShipServiceManagementService
+	url = https://github.com/GiethoornInternationalHarbor/ShipServiceManagementService
