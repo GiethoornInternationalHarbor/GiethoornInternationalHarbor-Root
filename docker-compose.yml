@@ -1,0 +1,335 @@
+version: '3.5'
+services:
+  visualizer:
+    image: dockersamples/visualizer
+    ports:
+      - "8080:8080"
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  # Start Container
+  container:
+    build: ./containerservice
+    image: giethoorninternationalharbor/containerservice
+    environment:
+      - DB_CONNECTION_STRING=ConnectionStrings:Db=Server=sql-container;Database=containerservice;User Id=sa;Password=qqXNhQ7YsxdFh5oT5OCk2vxZSEBBYk1yR8Dh1y6D1dqMdVb7XkGKga6O0gEDxNDA;
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - sql-container
+      - rabbitmq
+    networks:
+      - container
+      - broker
+  sql-container:
+    image: microsoft/mssql-server-linux:2017-latest
+    volumes:
+      - container-db-data:/var/opt/mssql
+    environment: 
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=qqXNhQ7YsxdFh5oT5OCk2vxZSEBBYk1yR8Dh1y6D1dqMdVb7XkGKga6O0gEDxNDA
+    networks: 
+      - container
+  # End container
+
+  # Start customer
+  customer:
+    build: ./customerservice
+    image: giethoorninternationalharbor/customerservice
+    environment:
+      - DB_CONNECTION_STRING=mongodb://mongo-customer:27017/customers
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - mongo-customer
+      - rabbitmq
+    networks: 
+      - customer
+      - broker
+  mongo-customer:
+    image: mongo
+    volumes:
+      - customer-db-data:/data/db
+    networks: 
+      - customer
+  # End customer
+
+  # Start Dock
+  dock:
+    build: ./dockservice
+    image: giethoorninternationalharbor/dockservice
+    environment:
+      - DB_CONNECTION_STRING=ConnectionStrings:Db=Server=sql-container;Database=dockservice;User Id=sa;Password=VfvV3O6XHDJvGIezUHIbAnetIjEtby2RSTTnnkPh1vPyU07pQol991KEEQBW6Pqs;
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - sql-container
+      - rabbitmq
+    networks:
+      - dock
+      - broker
+  sql-container:
+    image: microsoft/mssql-server-linux:2017-latest
+    volumes:
+      - dock-db-data:/var/opt/mssql
+    environment: 
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=VfvV3O6XHDJvGIezUHIbAnetIjEtby2RSTTnnkPh1vPyU07pQol991KEEQBW6Pqs
+    networks: 
+      - container
+  # End Dock
+
+  # Start Electricity
+  electricity:
+    build: ./electricityservice
+    image: giethoorninternationalharbor/electricityservice
+    environment:
+      - DB_CONNECTION_STRING=ConnectionStrings:Db=Server=sql-electricity;Database=electricityservice;User Id=sa;Password=cxG1xcDFBXE5yIgDpatB56x9h8NpB7Kv2RYJ4EdG9axJjdbbDKZgpwrjBAmkpOhk;
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - sql-electricity
+      - rabbitmq
+    networks:
+      - electricity
+      - broker
+  sql-electricity:
+    image: microsoft/mssql-server-linux:2017-latest
+    volumes:
+      - electricity-db-data:/var/opt/mssql
+    environment: 
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=cxG1xcDFBXE5yIgDpatB56x9h8NpB7Kv2RYJ4EdG9axJjdbbDKZgpwrjBAmkpOhk
+    networks: 
+      - electricity
+  # End Electricity
+
+  # Start Invoice
+  invoice:
+    build: ./invoiceservice
+    image: giethoorninternationalharbor/invoiceservice
+    environment:
+      - DB_CONNECTION_STRING=ConnectionStrings:Db=Server=sql-invoice;Database=invoiceservice;User Id=sa;Password=W5uKwlk93EVXUTo2ylBP8Qq1rmts83z02zVOGJFhZFy4rIfmc9SvdE6plijYxJ1p;
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - sql-invoice
+      - rabbitmq
+    networks:
+      - invoice
+      - broker
+  sql-invoice:
+    image: microsoft/mssql-server-linux:2017-latest
+    volumes:
+      - invoice-db-data:/var/opt/mssql
+    environment: 
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=W5uKwlk93EVXUTo2ylBP8Qq1rmts83z02zVOGJFhZFy4rIfmc9SvdE6plijYxJ1p
+    networks: 
+      - invoice
+  # End Invoice
+
+  # Start Refuel
+  refuel:
+    build: ./refuelservice
+    image: giethoorninternationalharbor/refuelservice
+    environment:
+      - DB_CONNECTION_STRING=ConnectionStrings:Db=Server=sql-refuel;Database=refuelservice;User Id=sa;Password=kgJJMsuBy8zKtYQ3fhcy0T4NgkhMHRAD3GzwWQYqnqlmzczIwko3B2CDMAlgG18O;
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - sql-refuel
+      - rabbitmq
+    networks:
+      - refuel
+      - broker
+  sql-refuel:
+    image: microsoft/mssql-server-linux:2017-latest
+    volumes:
+      - refuel-db-data:/var/opt/mssql
+    environment: 
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=kgJJMsuBy8zKtYQ3fhcy0T4NgkhMHRAD3GzwWQYqnqlmzczIwko3B2CDMAlgG18O
+    networks: 
+      - refuel
+  # End Refuel
+
+  # Start Rental
+  rental:
+    build: ./rentalservice
+    image: giethoorninternationalharbor/rentalservice
+    environment:
+      - DB_CONNECTION_STRING=mongodb://mongo-rental:27017/rentals
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - mongo-rental
+      - rabbitmq
+    networks: 
+      - rental
+      - broker
+  mongo-rental:
+    image: mongo
+    volumes:
+      - rental-db-data:/data/db
+    networks: 
+      - rental
+  # End Rental
+
+  # Start Security
+  security:
+    build: ./securityservice
+    image: giethoorninternationalharbor/securityservice
+    environment:
+      - DB_CONNECTION_STRING=ConnectionStrings:Db=Server=sql-security;Database=securityservice;User Id=sa;Password=H3JEpAYrxjIuogonJmBMUUKJxOIYkGdH9JsjYWblsEnSBS6u8li6E1NO7XfkPpv6;
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - sql-security
+      - rabbitmq
+    networks:
+      - security
+      - broker
+  sql-security:
+    image: microsoft/mssql-server-linux:2017-latest
+    volumes:
+      - security-db-data:/var/opt/mssql
+    environment: 
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=kgJJMsuBy8zKtYQ3fhcy0T4NgkhMHRAD3GzwWQYqnqlmzczIwko3B2CDMAlgG18O
+    networks: 
+      - security
+  # End Security
+
+  # Start ShipManagement
+  shipmanagement:
+    build: ./shipmanagementservice
+    image: giethoorninternationalharbor/shipmanagementservice
+    environment:
+      - DB_CONNECTION_STRING=ConnectionStrings:Db=Server=sql-shipmanagement;Database=shipmanagementservice;User Id=sa;Password=xEwvNzrSXiNgGVXPQmh9jWNzn6bKEOnBSecF07heh5yRVhhxOiV99V8qB8VKm9qe;
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - sql-shipmanagement
+      - rabbitmq
+    networks:
+      - shipmanagement
+      - broker
+  sql-shipmanagement:
+    image: microsoft/mssql-server-linux:2017-latest
+    volumes:
+      - shipmanagement-db-data:/var/opt/mssql
+    environment: 
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=xEwvNzrSXiNgGVXPQmh9jWNzn6bKEOnBSecF07heh5yRVhhxOiV99V8qB8VKm9qe
+    networks: 
+      - shipmanagement
+  # End ShipManagement
+
+  # Start ShipServiceManagement
+  shipservicemanagement:
+    build: ./shipservicemanagementservice
+    image: giethoorninternationalharbor/shipservicemanagementservice
+    environment:
+      - DB_CONNECTION_STRING=ConnectionStrings:Db=Server=sql-shipservicemanagement;Database=shipservicemanagementservice;User Id=sa;Password=Hk3444ZUL70TvUPEBvdFTDJrqSwC7Tij6v4awxJ6L29pDQPOLCYZG2u9pkhwsuUF;
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - sql-shipservicemanagement
+      - rabbitmq
+    networks:
+      - shipservicemanagement
+      - broker
+  sql-shipservicemanagement:
+    image: microsoft/mssql-server-linux:2017-latest
+    volumes:
+      - shipservicemanagement-db-data:/var/opt/mssql
+    environment: 
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Hk3444ZUL70TvUPEBvdFTDJrqSwC7Tij6v4awxJ6L29pDQPOLCYZG2u9pkhwsuUF
+    networks: 
+      - shipservicemanagement
+  # End ShipServiceManagement
+
+  # Start Transportation
+  transportation:
+    build: ./transportationservice
+    image: giethoorninternationalharbor/transportationservice
+    environment:
+      - DB_CONNECTION_STRING=mongodb://mongo-transportation:27017/transportations
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=service
+      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+    depends_on:
+      - mongo-transportation
+      - rabbitmq
+    networks: 
+      - transportation
+      - broker
+  mongo-transportation:
+    image: mongo
+    volumes:
+      - transportation-db-data:/data/db
+    networks: 
+      - transportation
+  # End Transportation
+
+  # Rabbit MQ
+  rabbitmq:
+    image: rabbitmq:3.7-management-alpine
+    ports:
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=service
+      - RABBITMQ_DEFAULT_PASS=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI 
+    networks:
+      - broker
+
+networks:
+  broker:
+    driver: overlay
+  container:
+    driver: overlay
+  customer:
+    driver: overlay    
+  dock:
+    driver: overlay    
+  electricity:
+    driver: overlay
+  invoice:
+    driver: overlay
+  refuel:
+    driver: overlay
+  rental:
+    driver: overlay
+  security:
+    driver: overlay
+  shipmanagement:
+    driver: overlay
+  shipservicemanagement:
+    driver: overlay
+  transportation:
+    driver: overlay
+
+volumes:
+  container-db-data:
+  customer-db-data:
+  dock-db-data:
+  electricity-db-data:
+  invoice-db-data:
+  refuel-db-data:
+  rental-db-data:
+  security-db-data:
+  shipmanagement-db-data:
+  shipservicemanagement-db-data:
+  transportation-db-data:
