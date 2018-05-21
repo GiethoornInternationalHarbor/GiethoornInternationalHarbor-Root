@@ -4,9 +4,13 @@ branches:
 services:
 - docker
 env:
+  matrix:
   - DOCKER_COMPOSE_VERSION=1.21.2
+  global:
+  - secure: bRa6+cy3wjlNTjXYKzLEd7knHFehWrRehm3qaNNZhpA4K2BSxfFNIl4Fzj0TXGCo8dDqV7Uz2MXFoYjqxMG7Nh/1yoPRcQn9uCvWoWkWvRh29+4SxvlzA3uOfj6ZLAy1fkBelKrK8b4kTxE6riNh9onvRg3bAuJJM9uwCw7eTfwLsOujwmaWTcA9eYtJHB+4MYv8NsZ71FSP4GxX0AMQabMxCwIoQop88swrI6hyWwi+tqVpVubw4mgIZQqZnIxSK651o69eXrNbYmK5NKD4aRMUISE8s6mCOaRCWR2ZrcnumpEQczS57fCK2KNei/k3G6Zilk7ar2gtycjcalCXcEl7BwxYHlOym8Qn3pwSwGv+qNQXvid3qAJfqQSlALQufXgi2TfkSpbHJ4IE1ZB2/ObnI4PVSVvm0C1lyJEITyqhVKTeCo0h5M7hUnkwUlPEQghPOYyatjFBO7GFCU7BmtDScEHwV8GZkk2jGugO420j39MNc0PzXuGpZrbengSmXr93cOH8lDowNNIySvwFcZHjthMQJ8HcKp/F8rvNqruux3IxsFT+oCkxCpBJ6MAmMMDF5VmbHl1/mA1nYZcD8fNG9IiRlv4hbln++YKGG1T1nqasicR5cMNrWQa0mgMyCjWmC8ybWtrjoc0T4PlWwYgKcKnhNZyA6GcO9pdVWAU=
 before_install:
-- openssl aes-256-cbc -k "$deploy_key_password" -in .travis/deploy-key.enc -out .travis/deploy-key -d
+- openssl aes-256-cbc -k "$deploy_key_password" -in .travis/deploy-key.enc -out .travis/deploy-key
+  -d
 - sudo rm /usr/local/bin/docker-compose
 - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
   -s`-`uname -m` > docker-compose
