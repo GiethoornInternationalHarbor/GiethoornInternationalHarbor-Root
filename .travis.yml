@@ -23,6 +23,7 @@ before_deploy:
 - chmod 600 /tmp/deploy_rsa
 - ssh-add /tmp/deploy_rsa
 - echo '$DEPLOY_HOST_PUBLIC_KEY' >> $HOME/.ssh/known_hosts
+- chmod a+x ./travis/deploy.sh
 
 deploy:
   provider: script
