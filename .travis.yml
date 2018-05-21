@@ -17,4 +17,4 @@ before_install:
 install: []
 
 script:
-  - docker-compose build
+  - docker-compose build --pull
