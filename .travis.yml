@@ -19,15 +19,12 @@ script:
 - docker-compose config
 before_deploy:
 - openssl aes-256-cbc -k "$deploy_key_password" -in .travis/deploy-key.enc -out /tmp/deploy_rsa -d
-- eval "$(ssh-agent -s)"
-- chmod 600 /tmp/deploy_rsa
-- ssh-add /tmp/deploy_rsa
 deploy:
   provider: script
   skip_cleanup: true
   script:
-  - scp .travis/deploy.sh $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
-  - scp docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
-  - ssh $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
+  - scp -i /tmp/deploy_rsa .travis/deploy.sh $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+  - scp -i /tmp/deploy_rsa docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+  - ssh -i /tmp/deploy_rsa $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
   on:
     branch: master
