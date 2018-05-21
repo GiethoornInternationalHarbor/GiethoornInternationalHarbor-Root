@@ -6,7 +6,7 @@ services:
 env:
 - DOCKER_COMPOSE_VERSION=1.21.2
 before_install:
-- openssl aes-256-cbc -K $encrypted_70b937222f8a_key -iv $encrypted_70b937222f8a_iv -in .travis/deploy-key.enc -out .travis/deploy-key -d
+- openssl aes-256-cbc -K $encrypted_3ea446ccdbdf_key -iv $encrypted_3ea446ccdbdf_iv -in .travis\\deploy-key.enc -out .travis\\deploy-key -d
 - chmod 600 .travis/deploy-key
 - mv .travis/deploy-key ~/.ssh/id_rsa
 - sudo rm /usr/local/bin/docker-compose
@@ -17,3 +17,9 @@ before_install:
 install: []
 script:
 - docker-compose build --pull
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER "mkdir -p $PRODUCTION_SERVER_THEMES_PATH/_tmp-bornholm"&& ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER "mkdir -p $PRODUCTION_SERVER_THEMES_PATH/bornholm" && rsync -rav -e ssh --exclude='.git/' --exclude=scripts/ --exclude='.travis.yml' --delete-excluded ./ $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER:$PRODUCTION_SERVER_THEMES_PATH/_tmp-bornholm && ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER "mv $PRODUCTION_SERVER_THEMES_PATH/bornholm $PRODUCTION_SERVER_THEMES_PATH/_old-bornholm && mv $PRODUCTION_SERVER_THEMES_PATH/_tmp-bornholm $PRODUCTION_SERVER_THEMES_PATH/bornholm" && ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER "rm -rf $PRODUCTION_SERVER_THEMES_PATH/_old-bornholm"
+  on:
+    branch: master
