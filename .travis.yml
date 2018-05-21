@@ -4,14 +4,8 @@ branches:
 services:
 - docker
 env:
-  matrix:
-  - DOCKER_COMPOSE_VERSION=1.21.2
-  global:
-    secure: X4eIAUJwkT4+JBLmmqY1nbjb2tGvWLO3C7zFm+oeH3hdt5+rUXaOqgiVfrumRJpRdARFqlFltoW4JhyH0WH1Sdee32ZmmDKpzliRGW1vLcjRDA777R7jLLtRzJUx/N+fT2cQNDO4UW691TUOSQrJC9Cx4ErwUt/TsSRhIVTG8vLomHrrR1qM1HGaSHC6KDu0iUEstXjEQsHp2MhjEnyJ3CZaJkVH0vijTbPhyH81UkyLbfLqcjEMYjXZHvWoHbohzbNo68eZ3gNgQh5tgsOX+pkSTVawWm8lGxcytFUqrCkvZMGSy+i8xLug7Ba8O0w77YrLf/Qp6EP3ecQmTBlJGmUUDM40d8nKliGYSNIpdIKeIt/MNWDmyJYJN9txduFqJI0zeKRk9ufFnhxaB/ox41NunTXEGwOdDQxheb7/SKKvEzjc9R/UHnb7g8gb3XSzEqsAA1EQJ0sCu1hkNA09MZV1qqhBfYi1ThJAEXEh3xU6CBZD13a9dwGvhz2LhXxZmgz0lu4CeAA8J/I/SJt2g7ixW/8qMneP2G5zs9S1Bq2m4cTUAmmKupjzz3zidUymAfqRwOTprRFjzDwDygkEqsPVpMBbqcxhPzVULSuyUvaPsZoJoGTRqDRBwIfYANRCL28M3QP0pMHneYp+6L+krv3STLSCkZasFCxR+cdF4hE=
+- DOCKER_COMPOSE_VERSION=1.21.2
 before_install:
-- openssl aes-256-cbc -k "$deploy_key_password" -in .travis/deploy-key.enc -out .travis/deploy-key -d
-- chmod 600 .travis/deploy-key
-- mv .travis/deploy-key ~/.ssh/id_rsa
 - sudo rm /usr/local/bin/docker-compose
 - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
   -s`-`uname -m` > docker-compose
@@ -20,16 +14,3 @@ before_install:
 install: []
 script:
 - docker-compose build --pull
-deploy:
-- provider: script
-  skip_cleanup: true
-  script: ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER "mkdir -p $PRODUCTION_SERVER_THEMES_PATH/_tmp-bornholm"&&
-    ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER "mkdir -p $PRODUCTION_SERVER_THEMES_PATH/bornholm"
-    && rsync -rav -e ssh --exclude='.git/' --exclude=scripts/ --exclude='.travis.yml'
-    --delete-excluded ./ $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER:$PRODUCTION_SERVER_THEMES_PATH/_tmp-bornholm
-    && ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER "mv $PRODUCTION_SERVER_THEMES_PATH/bornholm
-    $PRODUCTION_SERVER_THEMES_PATH/_old-bornholm && mv $PRODUCTION_SERVER_THEMES_PATH/_tmp-bornholm
-    $PRODUCTION_SERVER_THEMES_PATH/bornholm" && ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER
-    "rm -rf $PRODUCTION_SERVER_THEMES_PATH/_old-bornholm"
-  on:
-    branch: master
