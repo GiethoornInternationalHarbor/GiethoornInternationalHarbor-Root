@@ -20,12 +20,13 @@ script:
 before_deploy:
 - openssl aes-256-cbc -k "$deploy_key_password" -in .travis/deploy-key.enc -out /tmp/deploy_rsa -d
 - chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
 - echo '$DEPLOY_HOST_PUBLIC_KEY' >> $HOME/.ssh/known_hosts
 
 deploy:
   provider: script
   skip_cleanup: true
   script:
-  - scp -o StrictHostKeyChecking=no -i /tmp/deploy_rsa .travis/deploy.sh $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && scp -o StrictHostKeyChecking=no -i /tmp/deploy_rsa docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && ssh -o StrictHostKeyChecking=no -i /tmp/deploy_rsa $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
+  - scp -o StrictHostKeyChecking=no .travis/deploy.sh $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && scp -o StrictHostKeyChecking=no docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && ssh -o StrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
   on:
     branch: master
