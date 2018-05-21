@@ -25,6 +25,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-  - scp -i /tmp/deploy_rsa .travis/deploy.sh $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && scp -i /tmp/deploy_rsa docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && ssh -i /tmp/deploy_rsa $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
+  - scp -o StrictHostKeyChecking=no -i /tmp/deploy_rsa .travis/deploy.sh $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && scp -o StrictHostKeyChecking=no -i /tmp/deploy_rsa docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && ssh -o StrictHostKeyChecking=no -i /tmp/deploy_rsa $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
   on:
     branch: master
