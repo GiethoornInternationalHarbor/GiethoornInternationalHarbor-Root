@@ -28,6 +28,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-  - scp -o StrictHostKeyChecking=no .travis/deploy.sh $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && scp -o StrictHostKeyChecking=no docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && ssh -o StrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST 'chmod a+x $DEPLOY_PATH/deploy.sh | $DEPLOY_PATH/deploy.sh'
+  - scp -o StrictHostKeyChecking=no .travis/deploy.sh $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && scp -o StrictHostKeyChecking=no docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH && ssh -o StrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST 'chmod a+x $DEPLOY_PATH/deploy.sh && $DEPLOY_PATH/deploy.sh'
   on:
     branch: master
