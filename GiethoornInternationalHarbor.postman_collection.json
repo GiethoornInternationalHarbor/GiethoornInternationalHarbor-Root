@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d86ebde6-87e5-4655-a7d3-e734a0b908f9",
+		"_postman_id": "6b6ec07d-ab06-42d0-a898-8e88a6a19306",
 		"name": "GiethoornInternationalHarbor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -82,6 +82,80 @@
 					"path": [
 						"truck",
 						"arrive"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateShipService",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\": \"a14884e8-fd8c-4741-b31d-c554e2563a59\",\n\t\"Name\": \"RefuelService\",\n\t\"Price\": \"10.28\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/shipservice",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"shipservice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateShipService",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\": \"a14884e8-fd8c-4741-b31d-c554e2563a59\",\n\t\"Name\": \"RefuelService\",\n\t\"Price\": \"36.25\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/shipservice",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"shipservice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteShipService",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/shipservice/a14884e8-fd8c-4741-b31d-c554e2563a59",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"shipservice",
+						"a14884e8-fd8c-4741-b31d-c554e2563a59"
 					]
 				}
 			},
