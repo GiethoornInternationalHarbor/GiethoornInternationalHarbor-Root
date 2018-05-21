@@ -19,6 +19,7 @@ script:
 - docker-compose config
 before_deploy:
 - openssl aes-256-cbc -k "$deploy_key_password" -in .travis/deploy-key.enc -out /tmp/deploy_rsa -d
+- chmod 600 /tmp/deploy_rsa
 - echo '$DEPLOY_HOST_PUBLIC_KEY' >> $HOME/.ssh/known_hosts
 
 deploy:
