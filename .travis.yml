@@ -8,4 +8,5 @@ services:
 install: []
 
 script:
+  - docker-compose -v
   - docker-compose build
