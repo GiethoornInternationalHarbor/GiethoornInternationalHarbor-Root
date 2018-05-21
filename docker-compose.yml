@@ -188,7 +188,7 @@ services:
       - security-db-data:/var/opt/mssql
     environment: 
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=kgJJMsuBy8zKtYQ3fhcy0T4NgkhMHRAD3GzwWQYqnqlmzczIwko3B2CDMAlgG18O
+      - MSSQL_SA_PASSWORD=H3JEpAYrxjIuogonJmBMUUKJxOIYkGdH9JsjYWblsEnSBS6u8li6E1NO7XfkPpv6
     networks: 
       - security
   # End Security
