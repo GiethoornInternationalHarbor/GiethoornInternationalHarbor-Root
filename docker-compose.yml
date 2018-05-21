@@ -13,9 +13,7 @@ services:
     image: giethoorninternationalharbor/containerservice
     environment:
       - DB_CONNECTION_STRING=Server=sql-container;Database=containerservice;User Id=sa;Password=qqXNhQ7YsxdFh5oT5OCk2vxZSEBBYk1yR8Dh1y6D1dqMdVb7XkGKga6O0gEDxNDA;
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - sql-container
       - rabbitmq
@@ -39,9 +37,7 @@ services:
     image: giethoorninternationalharbor/customerservice
     environment:
       - DB_CONNECTION_STRING=mongodb://mongo-customer:27017/customers
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - mongo-customer
       - rabbitmq
@@ -62,9 +58,7 @@ services:
     image: giethoorninternationalharbor/dockservice
     environment:
       - DB_CONNECTION_STRING=Server=sql-container;Database=dockservice;User Id=sa;Password=VfvV3O6XHDJvGIezUHIbAnetIjEtby2RSTTnnkPh1vPyU07pQol991KEEQBW6Pqs;
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - sql-container
       - rabbitmq
@@ -88,9 +82,7 @@ services:
     image: giethoorninternationalharbor/electricityservice
     environment:
       - DB_CONNECTION_STRING=Server=sql-electricity;Database=electricityservice;User Id=sa;Password=cxG1xcDFBXE5yIgDpatB56x9h8NpB7Kv2RYJ4EdG9axJjdbbDKZgpwrjBAmkpOhk;
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - sql-electricity
       - rabbitmq
@@ -114,9 +106,7 @@ services:
     image: giethoorninternationalharbor/invoiceservice
     environment:
       - DB_CONNECTION_STRING=Server=sql-invoice;Database=invoiceservice;User Id=sa;Password=W5uKwlk93EVXUTo2ylBP8Qq1rmts83z02zVOGJFhZFy4rIfmc9SvdE6plijYxJ1p;
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - sql-invoice
       - rabbitmq
@@ -140,9 +130,7 @@ services:
     image: giethoorninternationalharbor/refuelservice
     environment:
       - DB_CONNECTION_STRING=Server=sql-refuel;Database=refuelservice;User Id=sa;Password=kgJJMsuBy8zKtYQ3fhcy0T4NgkhMHRAD3GzwWQYqnqlmzczIwko3B2CDMAlgG18O;
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - sql-refuel
       - rabbitmq
@@ -166,9 +154,7 @@ services:
     image: giethoorninternationalharbor/rentalservice
     environment:
       - DB_CONNECTION_STRING=mongodb://mongo-rental:27017/rentals
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - mongo-rental
       - rabbitmq
@@ -189,9 +175,7 @@ services:
     image: giethoorninternationalharbor/securityservice
     environment:
       - DB_CONNECTION_STRING=Server=sql-security;Database=securityservice;User Id=sa;Password=H3JEpAYrxjIuogonJmBMUUKJxOIYkGdH9JsjYWblsEnSBS6u8li6E1NO7XfkPpv6;
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - sql-security
       - rabbitmq
@@ -215,9 +199,7 @@ services:
     image: giethoorninternationalharbor/shipmanagementservice
     environment:
       - DB_CONNECTION_STRING=Server=sql-shipmanagement;Database=shipmanagementservice;User Id=sa;Password=xEwvNzrSXiNgGVXPQmh9jWNzn6bKEOnBSecF07heh5yRVhhxOiV99V8qB8VKm9qe;
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - sql-shipmanagement
       - rabbitmq
@@ -241,9 +223,7 @@ services:
     image: giethoorninternationalharbor/shipservicemanagementservice
     environment:
       - DB_CONNECTION_STRING=Server=sql-shipservicemanagement;Database=shipservicemanagementservice;User Id=sa;Password=Hk3444ZUL70TvUPEBvdFTDJrqSwC7Tij6v4awxJ6L29pDQPOLCYZG2u9pkhwsuUF;
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - sql-shipservicemanagement
       - rabbitmq
@@ -267,9 +247,7 @@ services:
     image: giethoorninternationalharbor/transportationservice
     environment:
       - DB_CONNECTION_STRING=mongodb://mongo-transportation:27017/transportations
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=service
-      - AMQP_PASSWORD=wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI
+      - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
     depends_on:
       - mongo-transportation
       - rabbitmq
