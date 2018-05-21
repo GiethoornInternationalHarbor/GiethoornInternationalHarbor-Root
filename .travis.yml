@@ -15,7 +15,8 @@ before_install:
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
 install: []
-script: []
+script:
+- docker-compose config
 before_deploy:
 - openssl aes-256-cbc -k "$deploy_key_password" -in .travis/deploy-key.enc -out /tmp/deploy_rsa -d
 - eval "$(ssh-agent -s)"
