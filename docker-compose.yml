@@ -173,7 +173,7 @@ services:
       labels: 
       - "traefik.port=5000" 
       - "traefik.backend=shipservicemanagement" 
-      - "traefik.frontend.rule=PathPrefix: /api/shipservice/" 
+      - "traefik.frontend.rule=PathPrefix: /api/shipservice" 
       - "traefik.docker.network=api"
     depends_on:
       - sql-giethoorn
@@ -195,7 +195,7 @@ services:
       labels: 
       - "traefik.port=3000" 
       - "traefik.backend=transportation" 
-      - "traefik.frontend.rule=PathPrefix: /api/truck/" 
+      - "traefik.frontend.rule=PathPrefix: /api/truck" 
       - "traefik.docker.network=api"
     depends_on:
       - mongo-giethoorn
