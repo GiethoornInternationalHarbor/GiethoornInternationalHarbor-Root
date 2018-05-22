@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "f330eb39-bb0c-49d3-a60a-6e43f1588c2b",
+		"_postman_id": "d3701bdc-75e5-f33e-449f-635f97b88798",
 		"name": "GiethoornInternationalHarbor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Transportation",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "Arrive Truck without Container",
@@ -95,7 +95,7 @@
 		},
 		{
 			"name": "Ship Service Management",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "Create a new Ship Service",
@@ -213,11 +213,10 @@
 	],
 	"variable": [
 		{
-			"id": "fd1ed3e6-9357-4ef7-ae10-36ab200aec4d",
+			"id": "11a2103f-68d1-4217-923f-5c78eccc05c1",
 			"key": "url",
-			"value": "http://localhost:3000/api/",
-			"type": "string",
-			"description": ""
+			"value": "http://159.65.35.196/api",
+			"type": "string"
 		}
 	]
 }
