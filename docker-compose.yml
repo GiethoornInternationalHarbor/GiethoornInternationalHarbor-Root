@@ -7,6 +7,26 @@ services:
     volumes: 
       - /var/run/docker.sock:/var/run/docker.sock
 
+  # API Gateway
+  traefik: 
+    image: traefik 
+    command: -c /dev/null --api --docker --docker.swarmmode 
+    ports: 
+      - "80:80" 
+      - "8081:8080" 
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock 
+    networks: 
+      - api
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
+        delay: 30s  
+  # End API Gateway
+
   # Start Container
   container:
     build: ./ContainerService
@@ -149,12 +169,19 @@ services:
     environment:
       - DB_CONNECTION_STRING=Server=sql-giethoorn;Database=shipservicemanagementservice;User Id=sa;Password=Hk3444ZUL70TvUPEBvdFTDJrqSwC7Tij6v4awxJ6L29pDQPOLCYZG2u9pkhwsuUF;
       - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
+    deploy:
+      labels: 
+      - "traefik.port=5000" 
+      - "traefik.backend=shipservicemanagement" 
+      - "traefik.frontend.rule=PathPrefix: /api/shipservice/" 
+      - "traefik.docker.network=api"
     depends_on:
       - sql-giethoorn
       - rabbitmq
     networks:
       - shipservicemanagement
       - broker
+      - api
   # End ShipServiceManagement
 
   # Start Transportation
@@ -164,12 +191,19 @@ services:
     environment:
       - DB_CONNECTION_STRING=mongodb://mongo-giethoorn:27017/transportations
       - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
+    deploy:
+      labels: 
+      - "traefik.port=3000" 
+      - "traefik.backend=transportation" 
+      - "traefik.frontend.rule=PathPrefix: /api/truck/" 
+      - "traefik.docker.network=api"
     depends_on:
       - mongo-giethoorn
       - rabbitmq
     networks: 
       - transportation
       - broker
+      - api
   # End Transportation
 
   # Start Mongo Databases
@@ -214,6 +248,8 @@ services:
       - broker
 
 networks:
+  api:
+    driver: overlay
   broker:
     driver: overlay
   container:
