@@ -203,6 +203,24 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/shipservice",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"shipservice"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -262,7 +280,7 @@
 	],
 	"variable": [
 		{
-			"id": "1ae9d6f4-37c0-4797-a131-615c9156d7ba",
+			"id": "e616c9a4-2556-4d8b-b434-e755a62267f8",
 			"key": "url",
 			"value": "http://159.65.35.196/api",
 			"type": "string",
@@ -270,7 +288,7 @@
 			"description": ""
 		},
 		{
-			"id": "9ed864e4-5c88-4c46-badf-6bf86501512f",
+			"id": "cefc70d3-d44b-4e6e-b84b-2f32369dac2c",
 			"key": "url",
 			"value": "http://localhost:5000/api",
 			"type": "string",
