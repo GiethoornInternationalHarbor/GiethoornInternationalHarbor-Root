@@ -102,13 +102,19 @@ services:
     build: ./InvoiceService
     image: giethoorninternationalharbor/invoiceservice
     environment:
-      - DB_CONNECTION_STRING=Server=sql-giethoorn;Database=invoiceservice;User Id=sa;Password=Hk3444ZUL70TvUPEBvdFTDJrqSwC7Tij6v4awxJ6L29pDQPOLCYZG2u9pkhwsuUF;
       - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
+    deploy:
+      labels: 
+      - "traefik.port=5000" 
+      - "traefik.backend=invoice" 
+      - "traefik.frontend.rule=PathPrefix: /api/invoice" 
+      - "traefik.docker.network=api"
     depends_on:
       - sql-giethoorn
       - rabbitmq
       - eventstore
     networks:
+      - api
       - invoice
       - broker
       - estore
