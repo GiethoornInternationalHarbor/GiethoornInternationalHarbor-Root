@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d3701bdc-75e5-f33e-449f-635f97b88798",
+		"_postman_id": "1059c844-e567-40ec-a8f0-343c2ffcb356",
 		"name": "GiethoornInternationalHarbor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -86,6 +86,24 @@
 							"path": [
 								"truck",
 								"arrive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get TruckOverview",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/truck",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"truck"
 							]
 						}
 					},
@@ -187,6 +205,37 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Invoice",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Invoice By Customer Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/invoice/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoice",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -213,10 +262,19 @@
 	],
 	"variable": [
 		{
-			"id": "11a2103f-68d1-4217-923f-5c78eccc05c1",
+			"id": "1ae9d6f4-37c0-4797-a131-615c9156d7ba",
 			"key": "url",
 			"value": "http://159.65.35.196/api",
-			"type": "string"
+			"type": "string",
+			"disabled": true,
+			"description": ""
+		},
+		{
+			"id": "9ed864e4-5c88-4c46-badf-6bf86501512f",
+			"key": "url",
+			"value": "http://localhost:5000/api",
+			"type": "string",
+			"description": ""
 		}
 	]
 }
