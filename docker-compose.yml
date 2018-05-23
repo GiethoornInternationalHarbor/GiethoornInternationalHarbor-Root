@@ -11,8 +11,7 @@ services:
   eventstore:
     image: eventstore/eventstore
     ports:
-      - "8082:2113"
-      - "1113:1113"
+      - "2113:2113"
     networks:
       - estore
   # End Event
