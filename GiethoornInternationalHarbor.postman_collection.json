@@ -235,7 +235,7 @@
 			"description": null,
 			"item": [
 				{
-					"name": "Get Invoice By Customer Email",
+					"name": "Get Invoice By Customer",
 					"request": {
 						"method": "GET",
 						"header": [],
