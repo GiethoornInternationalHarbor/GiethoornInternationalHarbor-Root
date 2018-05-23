@@ -235,7 +235,11 @@
 			"description": null,
 			"item": [
 				{
+<<<<<<< HEAD
 					"name": "Get Invoice By Customer",
+=======
+					"name": "Get Invoice By Id",
+>>>>>>> f6e4223495a64650b7485b9c3504120bbc8f112f
 					"request": {
 						"method": "GET",
 						"header": [],
