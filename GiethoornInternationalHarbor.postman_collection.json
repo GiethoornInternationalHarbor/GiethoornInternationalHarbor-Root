@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1059c844-e567-40ec-a8f0-343c2ffcb356",
+		"_postman_id": "faccd715-820b-4502-bb09-ede1a9b08b4c",
 		"name": "GiethoornInternationalHarbor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -96,7 +96,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/truck",
 							"host": [
@@ -209,7 +212,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/shipservice",
 							"host": [
@@ -226,14 +232,17 @@
 		},
 		{
 			"name": "Invoice",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "Get Invoice By Customer Email",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{url}}/invoice/:id",
 							"host": [
@@ -247,6 +256,32 @@
 								{
 									"key": "id",
 									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Invoices of Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/invoice/overview/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoice",
+								"overview",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a14884e8-fd8c-4741-b31d-c554e2563a57"
 								}
 							]
 						}
