@@ -7,6 +7,16 @@ services:
     volumes: 
       - /var/run/docker.sock:/var/run/docker.sock
 
+  # Eventstore
+  eventstore:
+    image: eventstore/eventstore
+    ports:
+      - "8082:2113"
+      - "1113:1113"
+    networks:
+      - estore
+  # End Event
+
   # API Gateway
   traefik: 
     image: traefik 
@@ -97,9 +107,11 @@ services:
     depends_on:
       - sql-giethoorn
       - rabbitmq
+      - eventstore
     networks:
       - invoice
       - broker
+      - estore
   # End Invoice
 
   # Start Refuel
