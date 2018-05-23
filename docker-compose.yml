@@ -103,6 +103,7 @@ services:
     image: giethoorninternationalharbor/invoiceservice
     environment:
       - AMQP_URL=amqp://service:wcA74WKW4TX0cUdtlK1O3rJrzOy9rPzYp6mKnL3OFQLQK78jLOxXM1QVs5pSCudI@rabbitmq:5672
+      - EVENT_STORE_URL=tcp://admin:changeit@eventstore:1113
     deploy:
       labels: 
       - "traefik.port=5000" 
