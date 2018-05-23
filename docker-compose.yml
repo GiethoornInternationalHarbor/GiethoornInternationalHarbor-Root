@@ -286,6 +286,8 @@ networks:
     driver: overlay
   transportation:
     driver: overlay
+  estore:
+    diver: overlay
 
 volumes:
   mongo-db-data:
