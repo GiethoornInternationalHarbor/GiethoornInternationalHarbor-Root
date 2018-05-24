@@ -286,7 +286,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "a14884e8-fd8c-4741-b31d-c554e2563a59",
+									"value": "48937702-5b17-4d8c-8185-51ba05ae2bca",
 									"description": "Generic customer ID"
 								}
 							]
@@ -339,6 +339,109 @@
 							],
 							"path": [
 								"customer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rental",
+			"description": null,
+			"item": [
+				{
+					"name": "Create a new rental",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"request\":\"Requeststring..\",\n\t\"customerId\":\"c299c2fe-3763-47b8-b05e-01ad98473e22\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/rental/request",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"rental",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept a rental",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\"id\":\"id\",\n\t\"request\":\"Requeststring..\",\n\t\"customerId\":\"c299c2fe-3763-47b8-b05e-01ad98473e22\",\n\t\"accepted\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/rental/accept/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"rental",
+								"accept",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "48937702-5b17-4d8c-8185-51ba05ae2bca",
+									"description": "Rental Id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Decline a rental",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"id\",\n\t\"request\":\"Requeststring..\",\n\t\"customerId\":\"c299c2fe-3763-47b8-b05e-01ad98473e22\",\n\t\"accepted\": \"false\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/rental/decline/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"rental",
+								"decline",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "48937702-5b17-4d8c-8185-51ba05ae2bca",
+									"description": "Rental Id"
+								}
 							]
 						}
 					},
@@ -434,14 +537,14 @@
 	],
 	"variable": [
 		{
-			"id": "901b636a-1496-4e58-8141-86a9eb6dd1d1",
+			"id": "35421264-ac91-4ce6-bd45-b3a8775de57b",
 			"key": "url",
 			"value": "http://159.65.35.196/api",
 			"type": "string",
 			"description": ""
 		},
 		{
-			"id": "825418e5-09ff-42eb-81cd-4577b5eb4e67",
+			"id": "857751d9-e073-4ea2-aeac-ee0ee5fd07e7",
 			"key": "url",
 			"value": "http://localhost:5000/api",
 			"type": "string",
