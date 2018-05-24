@@ -1,337 +1,286 @@
 {
-	"info": {
-		"_postman_id": "faccd715-820b-4502-bb09-ede1a9b08b4c",
-		"name": "GiethoornInternationalHarbor",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Transportation",
-			"description": null,
-			"item": [
-				{
-					"name": "Arrive Truck without Container",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"licensePlate\": \"A3-AFS-23\"\r\n}"
-						},
-						"url": {
-							"raw": "{{url}}/truck/arrive",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"truck",
-								"arrive"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Depart Truck",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"licensePlate\": \"A3-AFS-23\"\r\n}"
-						},
-						"url": {
-							"raw": "{{url}}/truck/depart",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"truck",
-								"depart"
-							]
-						},
-						"description": "Sends a call to notify everyone that the Truck is departing. The container on this truck is based on the services requested (Loading/Unloading of containers)."
-					},
-					"response": []
-				},
-				{
-					"name": "Arrive Truck with Container",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"container\": {\r\n        \"product\": {\r\n            \"name\": \"Ca324\",\r\n            \"type\": \"46\"\r\n        },\r\n        \"number\": \"123\"\r\n    },\r\n    \"licensePlate\": \"A3-AFS-23\"\r\n}"
-						},
-						"url": {
-							"raw": "{{url}}/truck/arrive",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"truck",
-								"arrive"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get TruckOverview",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/truck",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"truck"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Ship Service Management",
-			"description": null,
-			"item": [
-				{
-					"name": "Create a new Ship Service",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"id\": \"a14884e8-fd8c-4741-b31d-c554e2563a59\",\n\t\"name\": \"RefuelService\",\n\t\"price\": \"10.28\"\n}"
-						},
-						"url": {
-							"raw": "{{url}}/shipservice",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"shipservice"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update a Ship Service",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"id\": \"a14884e8-fd8c-4741-b31d-c554e2563a59\",\n\t\"name\": \"RefuelService\",\n\t\"price\": \"36.25\"\n}"
-						},
-						"url": {
-							"raw": "{{url}}/shipservice/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"shipservice",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "a14884e8-fd8c-4741-b31d-c554e2563a59",
-									"description": "The id of the Ship service to update"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete a ShipService",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/shipservice/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"shipservice",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "a14884e8-fd8c-4741-b31d-c554e2563a59",
-									"description": "The id of the Ship service to delete"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/shipservice",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"shipservice"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Invoice",
-			"description": null,
-			"item": [
-				{
-<<<<<<< HEAD
-					"name": "Get Invoice By Customer",
-=======
-					"name": "Get Invoice By Id",
->>>>>>> f6e4223495a64650b7485b9c3504120bbc8f112f
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/invoice/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"invoice",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Invoices of Customer",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{url}}/invoice/overview/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"invoice",
-								"overview",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "a14884e8-fd8c-4741-b31d-c554e2563a57"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "f967feb6-4194-4a25-8bc7-37aba2bae0f1",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "591192ba-8ea4-45aa-b8ce-7b7e61561c56",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"id": "e616c9a4-2556-4d8b-b434-e755a62267f8",
-			"key": "url",
-			"value": "http://159.65.35.196/api",
-			"type": "string",
-			"disabled": true,
-			"description": ""
-		},
-		{
-			"id": "cefc70d3-d44b-4e6e-b84b-2f32369dac2c",
-			"key": "url",
-			"value": "http://localhost:5000/api",
-			"type": "string",
-			"description": ""
-		}
-	]
+  "info": {
+    "_postman_id": "faccd715-820b-4502-bb09-ede1a9b08b4c",
+    "name": "GiethoornInternationalHarbor",
+    "schema":
+      "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Transportation",
+      "description": null,
+      "item": [
+        {
+          "name": "Arrive Truck without Container",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"licensePlate\": \"A3-AFS-23\"\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}/truck/arrive",
+              "host": ["{{url}}"],
+              "path": ["truck", "arrive"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Depart Truck",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"licensePlate\": \"A3-AFS-23\"\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}/truck/depart",
+              "host": ["{{url}}"],
+              "path": ["truck", "depart"]
+            },
+            "description":
+              "Sends a call to notify everyone that the Truck is departing. The container on this truck is based on the services requested (Loading/Unloading of containers)."
+          },
+          "response": []
+        },
+        {
+          "name": "Arrive Truck with Container",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw":
+                "{\r\n    \"container\": {\r\n        \"product\": {\r\n            \"name\": \"Ca324\",\r\n            \"type\": \"46\"\r\n        },\r\n        \"number\": \"123\"\r\n    },\r\n    \"licensePlate\": \"A3-AFS-23\"\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}/truck/arrive",
+              "host": ["{{url}}"],
+              "path": ["truck", "arrive"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get TruckOverview",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/truck",
+              "host": ["{{url}}"],
+              "path": ["truck"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Ship Service Management",
+      "description": null,
+      "item": [
+        {
+          "name": "Create a new Ship Service",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw":
+                "{\n\t\"id\": \"a14884e8-fd8c-4741-b31d-c554e2563a59\",\n\t\"name\": \"RefuelService\",\n\t\"price\": \"10.28\"\n}"
+            },
+            "url": {
+              "raw": "{{url}}/shipservice",
+              "host": ["{{url}}"],
+              "path": ["shipservice"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a Ship Service",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw":
+                "{\n\t\"id\": \"a14884e8-fd8c-4741-b31d-c554e2563a59\",\n\t\"name\": \"RefuelService\",\n\t\"price\": \"36.25\"\n}"
+            },
+            "url": {
+              "raw": "{{url}}/shipservice/:id",
+              "host": ["{{url}}"],
+              "path": ["shipservice", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "a14884e8-fd8c-4741-b31d-c554e2563a59",
+                  "description": "The id of the Ship service to update"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a ShipService",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/shipservice/:id",
+              "host": ["{{url}}"],
+              "path": ["shipservice", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "a14884e8-fd8c-4741-b31d-c554e2563a59",
+                  "description": "The id of the Ship service to delete"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/shipservice",
+              "host": ["{{url}}"],
+              "path": ["shipservice"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Invoice",
+      "description": null,
+      "item": [
+        {
+          "name": "Get Invoice By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/invoice/:id",
+              "host": ["{{url}}"],
+              "path": ["invoice", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Invoices of Customer",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "{{url}}/invoice/overview/:id",
+              "host": ["{{url}}"],
+              "path": ["invoice", "overview", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "a14884e8-fd8c-4741-b31d-c554e2563a57"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "f967feb6-4194-4a25-8bc7-37aba2bae0f1",
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "591192ba-8ea4-45aa-b8ce-7b7e61561c56",
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "e616c9a4-2556-4d8b-b434-e755a62267f8",
+      "key": "url",
+      "value": "http://159.65.35.196/api",
+      "type": "string",
+      "disabled": true,
+      "description": ""
+    },
+    {
+      "id": "cefc70d3-d44b-4e6e-b84b-2f32369dac2c",
+      "key": "url",
+      "value": "http://localhost:5000/api",
+      "type": "string",
+      "description": ""
+    }
+  ]
 }
