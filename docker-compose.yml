@@ -152,9 +152,16 @@ services:
     depends_on:
       - mongo-giethoorn
       - rabbitmq
+    deploy:
+      labels: 
+      - "traefik.port=5000" 
+      - "traefik.backend=rental" 
+      - "traefik.frontend.rule=PathPrefix: /api/rental" 
+      - "traefik.docker.network=api"
     networks: 
       - rental
       - broker
+      - api
   # End Rental
 
   # Start Security
