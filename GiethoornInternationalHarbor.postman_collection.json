@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "135e3d5a-d758-437f-935c-92c594e521dd",
+		"_postman_id": "e0c8875f-4988-43d7-831c-f0087c863b87",
 		"name": "GiethoornInternationalHarbor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -130,7 +130,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": \"a14884e8-fd8c-4741-b31d-c554e2563a59\",\n\t\"name\": \"RefuelService\",\n\t\"price\": \"10.28\"\n}"
+							"raw": "{\n\t\"id\": \"ff9f7c8c-92b6-4863-8451-de7c94389d53\",\n\t\"name\": \"RefuelService\",\n\t\"price\": \"10.28\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}/shipservice",
@@ -231,6 +231,122 @@
 			]
 		},
 		{
+			"name": "Customer",
+			"description": null,
+			"item": [
+				{
+					"name": "Create a new customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Postman customer\",\n\t\"email\": \"PostmanEmail@generic.ru\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/customer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"The new name\",\n\t\"email\": \"UpdatedEmailhere@generic.ru\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/customer/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a14884e8-fd8c-4741-b31d-c554e2563a59",
+									"description": "Generic customer ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/customer/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a14884e8-fd8c-4741-b31d-c554e2563a59",
+									"description": "The id of the customer you want to delete"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/customer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Invoice",
 			"description": null,
 			"item": [
@@ -318,18 +434,18 @@
 	],
 	"variable": [
 		{
-			"id": "e616c9a4-2556-4d8b-b434-e755a62267f8",
+			"id": "901b636a-1496-4e58-8141-86a9eb6dd1d1",
 			"key": "url",
 			"value": "http://159.65.35.196/api",
 			"type": "string",
-			"disabled": true,
 			"description": ""
 		},
 		{
-			"id": "cefc70d3-d44b-4e6e-b84b-2f32369dac2c",
+			"id": "825418e5-09ff-42eb-81cd-4577b5eb4e67",
 			"key": "url",
 			"value": "http://localhost:5000/api",
 			"type": "string",
+			"disabled": true,
 			"description": ""
 		}
 	]
