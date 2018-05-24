@@ -61,7 +61,14 @@ services:
     depends_on:
       - mongo-giethoorn
       - rabbitmq
+    deploy:
+      labels: 
+      - "traefik.port=3000" 
+      - "traefik.backend=customer" 
+      - "traefik.frontend.rule=PathPrefix: /api/customer" 
+      - "traefik.docker.network=api"
     networks: 
+      - api
       - customer
       - broker
   # End customer
