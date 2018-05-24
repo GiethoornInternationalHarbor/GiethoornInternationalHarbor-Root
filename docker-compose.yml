@@ -154,7 +154,7 @@ services:
       - rabbitmq
     deploy:
       labels: 
-      - "traefik.port=5000" 
+      - "traefik.port=3000" 
       - "traefik.backend=rental" 
       - "traefik.frontend.rule=PathPrefix: /api/rental" 
       - "traefik.docker.network=api"
